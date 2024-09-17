@@ -9,6 +9,11 @@ import java.util.*;
 
 public class TheShapeFixer {
     private final Calculator2D calculator =  new Calculator2D();
+    private boolean removeIntermediateDots = false;
+
+    public void setRemoveIntermediateDots(boolean removeIntermediateDots) {
+        this.removeIntermediateDots = removeIntermediateDots;
+    }
 
     public boolean isValid(Shape2D shape) {
         return checkDotsUnique(shape.dots())
@@ -140,7 +145,9 @@ public class TheShapeFixer {
             Segment2D segment1 = new Segment2D(cleanDots.getLast(), shapeDots.get(i));
             Segment2D segment2 = new Segment2D(shapeDots.get(i), shapeDots.get(i + 1));
             if (calculator.areCollinear(segment1, segment2)) {
-                continue;
+                if (removeIntermediateDots || calculator.isCollinearReversed(segment1, segment2)) {
+                    continue;
+                }
             }
             cleanDots.add(shapeDots.get(i));
         }

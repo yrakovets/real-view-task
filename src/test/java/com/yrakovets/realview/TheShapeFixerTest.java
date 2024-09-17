@@ -36,7 +36,7 @@ public class TheShapeFixerTest {
                 new Dot2D(0d, 1d), new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(2d, 0d),
                 new Dot2D(1d, 1d), new Dot2D(1d, 0d)});
 
-        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(2d, 0d),
+        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(2d, 0d),
                 new Dot2D(1d, 1d), new Dot2D(0d, 1d));
 
         Shape2D result = new TheShapeFixer().repair(shape);
@@ -51,7 +51,7 @@ public class TheShapeFixerTest {
                 new Dot2D(0d, 1d), new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(1d, 1d),
                 new Dot2D(2d, 0d), new Dot2D(1d, 0d)});
 
-        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(2d, 0d),
+        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(2d, 0d),
                 new Dot2D(1d, 1d), new Dot2D(0d, 1d));
 
         Shape2D result = new TheShapeFixer().repair(shape);
@@ -67,8 +67,8 @@ public class TheShapeFixerTest {
                 new Dot2D(2d, 0d), new Dot2D(1d, 0d), new Dot2D(2d, 0d), new Dot2D(3d, 3d),
                 new Dot2D(1d, 1d), new Dot2D(2d, 0d)});
 
-        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(2d, 0d), new Dot2D(3d, 3d),
-                new Dot2D(1d, 1d), new Dot2D(0d, 1d));
+        Set<Dot2D> expectedDots = Set.of(new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(2d, 0d),
+                new Dot2D(3d, 3d), new Dot2D(1d, 1d), new Dot2D(0d, 1d));
 
         Shape2D result = new TheShapeFixer().repair(shape);
 
