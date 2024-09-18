@@ -9,10 +9,10 @@ import java.util.*;
 
 public class TheShapeFixer {
     private final Calculator2D calculator =  new Calculator2D();
-    private boolean removeIntermediateDots = false;
+    private static boolean removeIntermediateDots = false;
 
-    public void setRemoveIntermediateDots(boolean removeIntermediateDots) {
-        this.removeIntermediateDots = removeIntermediateDots;
+    public static void setRemoveIntermediateDots(boolean removeIntermediateDots) {
+        TheShapeFixer.removeIntermediateDots = removeIntermediateDots;
     }
 
     public boolean isValid(Shape2D shape) {
@@ -59,10 +59,13 @@ public class TheShapeFixer {
                 throw new IllegalArgumentException("Shape contains not valid shapes");
             }
         }
-        Shape2D resultShape = simpleShapes.getFirst();
+
+        Shape2D resultShape = getCleanShape(Arrays.asList(simpleShapes.getFirst().dots()));
+
         for (int i = 1; i < simpleShapes.size(); i++) {
             resultShape = connectShapes(resultShape, simpleShapes.get(i));
         }
+
         return resultShape;
     }
 
@@ -84,6 +87,10 @@ public class TheShapeFixer {
                 anotherShapeCommonSegmentIndex));
         newShapeDots.addAll(Arrays.stream(Arrays.copyOfRange(shape.dots(), shapeCommonSegmentIndex + 1, shape.dots().length)).toList());
 
+        return getCleanShape(newShapeDots);
+    }
+
+    private Shape2D getCleanShape(List<Dot2D> newShapeDots) {
         List<Dot2D> cleanDots = getCleanDots(newShapeDots);
 
         Dot2D[] array = new Dot2D[cleanDots.size()];

@@ -9,6 +9,10 @@ import java.util.Arrays;
 import java.util.Set;
 
 public class TheShapeFixerTest {
+    {
+        TheShapeFixer.setRemoveIntermediateDots(false);
+    }
+
     @Test
     public void squareTest() {
         Shape2D shape = new Shape2D(new Dot2D[]{new Dot2D(0d, 0d), new Dot2D(1d, 0d), new Dot2D(1d, 1d),
@@ -72,6 +76,23 @@ public class TheShapeFixerTest {
 
         Shape2D result = new TheShapeFixer().repair(shape);
 
+        Assertions.assertEquals(expectedDots.size() + 1, result.dots().length);
+        Assertions.assertTrue(expectedDots.containsAll(Arrays.asList(result.dots())));
+    }
+
+    @Test
+    public void repair2Test() {
+        Shape2D shape = new Shape2D(new Dot2D[]{new Dot2D(0, 0), new Dot2D(2, 0),
+                new Dot2D(4, 0), new Dot2D(4, 2),
+                new Dot2D(2, 2), new Dot2D(2, 1),
+                new Dot2D(2, 4), new Dot2D(0, 4),
+                new Dot2D(0, 0)});
+
+        Set<Dot2D> expectedDots = Set.of(new Dot2D(0, 0), new Dot2D(2, 0),
+                new Dot2D(4, 0), new Dot2D(4, 2), new Dot2D(2, 2),
+                new Dot2D(2, 4), new Dot2D(0, 4));
+
+        Shape2D result = new TheShapeFixer().repair(shape);
         Assertions.assertEquals(expectedDots.size() + 1, result.dots().length);
         Assertions.assertTrue(expectedDots.containsAll(Arrays.asList(result.dots())));
     }
